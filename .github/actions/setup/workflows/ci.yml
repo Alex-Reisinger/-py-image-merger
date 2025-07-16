@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup
+
+      - name: Deps check
+        run: uv lock --check
+
+      - name: Format
+        run: uv run ruff format
+
+      - name: Lint
+        run: uv run ruff check --fix
+
+      - name: Typecheck
+        run: uv run pyright
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout 
+          uses: actions/checkout@v4
+
+        - uses: ./.github/actions/setup
+
+        - name: Build
+          run: uv build --all-packages

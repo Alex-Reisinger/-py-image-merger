@@ -1,0 +1,51 @@
+[project]
+name = "py-tiff-merger"
+version = "0.1.0"
+description = "Merge multiple TIFFs into one TIFF"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    {name = "rjoydip", email = "joydipand@gmail.com"}
+]
+dependencies = [
+    "pillow>=11.2.1"
+]
+[dependency-groups]
+lint = [
+    "ruff>=0.11.6",
+    "pyright>=1.1.399",
+]
+
+[build-system]
+requires = ["setuptools", "wheel", "pip"]
+build-backend = "setuptools.build_meta"
+
+# UV
+[tool.uv]
+upgrade = false
+default-groups = "all"
+
+# Pyright
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+ignore = ["docs/", "tests/test_*.py"]
+
+# Ruff
+[tool.ruff]
+exclude = [
+    ".git",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".venv",
+    ".vscode",
+    "dist",
+    "site-packages",
+    "venv",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

@@ -1,0 +1,15 @@
+name: Setup
+description: Action Setup
+
+runs:
+  using: composite
+  steps:
+    - name: "Install UV"
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+
+    - name: Install deps
+      shell: bash
+      run: |
+        uv sync --locked --active --all-extras --all-packages --all-groups
